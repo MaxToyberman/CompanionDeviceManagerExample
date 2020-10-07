@@ -68,14 +68,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+        String bpDevicesPattern = "A&D|1T";
+        String glucoDevicesPattern = "Connex";
+
+
         deviceManager = getSystemService(CompanionDeviceManager.class);
 
         ScanFilter.Builder scanFilterBuilder = new ScanFilter.Builder();
-        scanFilterBuilder.setServiceUuid(ParcelUuid.fromString("DEVICE-UUID-STRING"));
+//        scanFilterBuilder.setServiceUuid(ParcelUuid.fromString("DEVICE-UUID-STRING"));
 
         deviceFilter = new BluetoothLeDeviceFilter.Builder()
                .setScanFilter(scanFilterBuilder.build()) // This doesn't work
-                // .setNamePattern(Pattern.compile("1T")) // This works when setScanFilter is commented
+                 .setNamePattern(Pattern.compile(bpDevicesPattern)) // This works when setScanFilter is commented
                 .build();
 
         pairingRequest = new AssociationRequest.Builder()
